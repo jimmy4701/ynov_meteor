@@ -1,3 +1,10 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Landing from '/imports/pages/Landing'
+
 Meteor.startup(() => {
-    console.log("CLIENT : HELLO")
+    ReactDOM.render(
+        <Landing />,
+        document.getElementById('root')
+    )
 })
