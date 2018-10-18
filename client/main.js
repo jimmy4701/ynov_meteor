@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Landing from '/imports/pages/Landing'
+import App from '/imports/startup/App'
 
 Meteor.startup(() => {
     ReactDOM.render(
-        <Landing />,
+        <App />,
         document.getElementById('root')
     )
 })
