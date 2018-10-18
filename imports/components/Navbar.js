@@ -12,11 +12,11 @@ export default class Navbar extends Component {
 
     render(){
 
-        const {forceTitle, height} = this.props
+        const {forceTitle, height, onInternButtonClick} = this.props
         const {title, color} = this.state
 
         return(
-            <div style={{backgroundColor: color, height}} onClick={this.toggleColor}>
+            <div style={{backgroundColor: color, height}} onClick={onInternButtonClick}>
                 {forceTitle ? forceTitle : title}
             </div>
         )
