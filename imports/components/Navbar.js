@@ -16,7 +16,7 @@ export default class Navbar extends Component {
         const {title, color} = this.state
 
         return(
-            <div style={{backgroundColor: color, height}} onClick={onInternButtonClick}>
+            <div style={{backgroundColor: color, height}} onClick={() => onInternButtonClick("Mon titre")}>
                 {forceTitle ? forceTitle : title}
             </div>
         )

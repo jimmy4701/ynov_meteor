@@ -11,8 +11,8 @@ export default class Landing extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    modifyTitle = () => {
-        this.setState({landing_title: "MODIFIÉ"})
+    modifyTitle = (t) => {
+        this.setState({landing_title: t ? t : "MODIFIÉ"})
     }
 
     render(){
