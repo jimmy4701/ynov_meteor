@@ -1,23 +1,22 @@
 import React, { Component } from 'react'
+import { Meteor } from 'meteor/meteor';
 
 
 export default class Navbar extends Component {
     state = {
-        title: "MA SUPER NAVBAR",
-        color: "green"
+        
     }
 
-    toggleColor = () => this.setState({color: this.state.color == 'green' ? 'red' : 'green'})
-
+    
+    logout = () => {
+        Meteor.logout
+    }
 
     render(){
 
-        const {forceTitle, height, onInternButtonClick} = this.props
-        const {title, color} = this.state
-
         return(
-            <div style={{backgroundColor: color, height}} onClick={() => onInternButtonClick("Mon titre")}>
-                {forceTitle ? forceTitle : title}
+            <div style={{backgroundColor: "#f2f2f2", borderBottom: "1px solid black"}}>
+                {Meteor.userId() ? <button onClick={this.logout}>DECONNEXION</button> : ""}
             </div>
         )
     }
