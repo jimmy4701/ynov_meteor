@@ -1,25 +1,32 @@
 import React, { Component } from 'react'
 import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data'
 
 
-export default class Navbar extends Component {
+class Navbar extends Component {
     state = {
         
     }
 
     
     logout = () => {
-        Meteor.logout
+        Meteor.logout()
     }
 
     render(){
+        const {user} = this.props
 
         return(
             <div style={{backgroundColor: "#f2f2f2", borderBottom: "1px solid black"}}>
-                {Meteor.userId() ? <button onClick={this.logout}>DECONNEXION</button> : ""}
+                {user ? <button onClick={this.logout}>DECONNEXION</button> : ""}
             </div>
         )
     }
 
 }
 
+export default NavbarContainer = withTracker(() => {
+    return {
+        user: Meteor.user()
+    }
+})(Navbar)
