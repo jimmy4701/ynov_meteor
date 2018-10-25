@@ -1,7 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data'
-
+import styled from 'styled-components'
+import { Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 class Navbar extends Component {
     state = {
@@ -17,9 +19,18 @@ class Navbar extends Component {
         const {user} = this.props
 
         return(
-            <div style={{backgroundColor: "#f2f2f2", borderBottom: "1px solid black"}}>
-                {user ? <button onClick={this.logout}>DECONNEXION</button> : ""}
-            </div>
+            <MainContainer>
+                {user ? 
+                    <Button onClick={this.logout}>DECONNEXION</Button> 
+                    :
+                    <Fragment>
+                        <Button size="mini">Connexion</Button>
+                        <Link to="/signup">
+                            <Button size="mini">Inscription</Button> 
+                        </Link>
+                    </Fragment>
+                }
+            </MainContainer>
         )
     }
 
@@ -30,3 +41,11 @@ export default NavbarContainer = withTracker((props) => {
         user: Meteor.user()
     }
 })(Navbar)
+
+const MainContainer = styled.div`
+    height: 4em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 2px solid #d8d8d8;
+`

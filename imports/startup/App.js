@@ -8,12 +8,14 @@ export default class App extends Component{
     render(){
         return(
             <div>
-                <Navbar />
                 <Router>
-                    <Switch>
-                        <Route component={Landing} path="/" exact />
-                        <Route component={Signup} path="/signup" />
-                    </Switch>
+                    <div>
+                        <Navbar />
+                        <Switch>
+                            <Route component={Landing} path="/" exact />
+                            <Route component={Signup} path="/signup" />
+                        </Switch>
+                    </div>
                 </Router>
             </div>
         )
