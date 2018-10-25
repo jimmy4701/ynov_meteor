@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { withTracker } from 'meteor/react-meteor-data'
+import { Button, Container } from 'semantic-ui-react'
+import UserPartial from '/imports/components/users/UserPartial'
 
 
 class Landing extends Component {
@@ -12,7 +14,9 @@ class Landing extends Component {
         const {users} = this.props
         return(
             <div>
-                {JSON.stringify(users)}
+                <Container>
+                    {users.map(user => <UserPartial user={user}/>)}
+                </Container>
             </div>
         )
     }
