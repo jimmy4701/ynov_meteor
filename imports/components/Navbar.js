@@ -4,10 +4,11 @@ import { withTracker } from 'meteor/react-meteor-data'
 import styled from 'styled-components'
 import { Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import SigninForm from '/imports/components/users/SigninForm'
 
 class Navbar extends Component {
     state = {
-        
+        connect: false
     }
 
     
@@ -15,16 +16,23 @@ class Navbar extends Component {
         Meteor.logout()
     }
 
+    toggleState = (e, {name}) => this.setState({[name]: !this.state[name]})
+
+
     render(){
         const {user} = this.props
-
+        const {connect} = this.state
         return(
             <MainContainer>
                 {user ? 
                     <Button onClick={this.logout}>DECONNEXION</Button> 
                     :
                     <Fragment>
-                        <Button size="mini">Connexion</Button>
+                        {connect ?
+                            <SigninForm />
+                        :
+                            <Button onClick={this.toggleState} name="connect" size="mini">Connexion</Button>
+                        }
                         <Link to="/signup">
                             <Button size="mini">Inscription</Button> 
                         </Link>
