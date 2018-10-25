@@ -25,7 +25,7 @@ class Navbar extends Component {
 
 }
 
-export default NavbarContainer = withTracker(() => {
+export default NavbarContainer = withTracker((props) => {
     return {
         user: Meteor.user()
     }
