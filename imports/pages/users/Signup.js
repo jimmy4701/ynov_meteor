@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { toast } from 'react-toastify'
 import { Form, Container, Button} from 'semantic-ui-react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 
 class Signup extends Component {
     state = {
@@ -45,3 +45,4 @@ class Signup extends Component {
 }
 
 export default withRouter(Signup)
+

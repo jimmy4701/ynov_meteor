@@ -11,10 +11,12 @@ class Landing extends Component {
 
 
     render(){
-        const {users} = this.props
+        const {users, current_user} = this.props
         return(
             <div>
                 <Container>
+                    {users.length == 0 && <p>Aucun utilisateurs</p>}
+                    {!current_user && <p>Vous devez vous connecter pour voir la liste des utilisateurs</p>}
                     {users.map(user => <UserPartial user={user}/>)}
                 </Container>
             </div>
@@ -25,8 +27,10 @@ class Landing extends Component {
 
 export default LandingContainer = withTracker(() => {
     const usersPublication = Meteor.subscribe('users.all')
-    const users = Meteor.users.find().fetch()
+    const users = Meteor.users.find({_id: {$ne: Meteor.userId()}}).fetch()
+    const current_user = Meteor.user()
     return {
-        users
+        users,
+        current_user
     }
 })(Landing)
