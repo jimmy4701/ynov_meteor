@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route} from 'react-router-dom'
-import {Landing, Signup } from '/imports/pages'
+import {Landing, Signup, NotFound } from '/imports/pages'
 
 export default class MainLayout extends Component {
 
@@ -10,6 +10,7 @@ export default class MainLayout extends Component {
             <Switch>
                 <Route path="/" exact component={Landing} />
                 <Route path="/signup" component={Signup} />
+                <Route path="*" component={NotFound} />
             </Switch>
         )
     }
