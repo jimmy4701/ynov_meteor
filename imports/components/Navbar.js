@@ -24,8 +24,13 @@ class Navbar extends Component {
         const {connect} = this.state
         return(
             <MainContainer>
-                {user ? 
-                    <Button onClick={this.logout}>DECONNEXION</Button> 
+                {user ?
+                    <Fragment>
+                        <Link to="/admin">
+                            <Button size="mini">ADMIN</Button> 
+                        </Link>
+                        <Button onClick={this.logout}>DECONNEXION</Button> 
+                    </Fragment>
                     :
                     <Fragment>
                         {connect ?
