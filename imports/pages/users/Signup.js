@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { toast } from 'react-toastify'
+import { Form, Container, Button} from 'semantic-ui-react'
 
 export default class Signup extends Component {
     state = {
@@ -9,27 +11,31 @@ export default class Signup extends Component {
 
     submitForm = (e) => {
         e.preventDefault()
+        this.setState({loading: true})
         const {email, password} = this.state
         Accounts.createUser({email, password}, (error, result) => {
             if(error){
-                alert('Erreur inscription', error)
+               toast.error(`Erreur lors de l'inscription ${error.message}`)
             }else{
                 Meteor.loginWithPassword(email, password)
             }
+            this.setState({loading: false})
         })
     }
 
     render(){
-        const {email, password} = this.state
+        const {email, password, loading} = this.state
 
         return(
             <div>
-                <p>Inscrivez-vous</p>
-                <form onSubmit={this.submitForm}>
-                    <input value={email} type="email" name="email" onChange={this.handleChange} placeholder="Email"/>
-                    <input value={password} type="password" name="password" onChange={this.handleChange} placeholder="Password"/>
-                    <button type="submit">M'inscrire</button>
-                </form>
+                <Container>
+                    <h2>Inscrivez-vous</h2>
+                    <Form onSubmit={!loading && this.submitForm} loading={loading} >
+                        <Form.Input value={email} type="email" name="email" onChange={this.handleChange} placeholder="Email"/>
+                        <Form.Input value={password} type="password" name="password" onChange={this.handleChange} placeholder="Password"/>
+                        <Button>M'inscrire</Button>
+                    </Form>
+                </Container>
             </div>
         )
     }
