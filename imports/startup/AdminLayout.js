@@ -8,11 +8,10 @@ class AdminLayout extends Component {
 
     render(){
         const {user} = this.props
-        
+
         if(user){
             return(
                 <Switch>
-                    
                     <Route path="/admin" exact component={Dashboard} />
                     <Route path="*" component={NotFound} />
                 </Switch>

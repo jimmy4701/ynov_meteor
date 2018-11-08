@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { Segment, Button } from 'semantic-ui-react'
+import { toast } from 'react-toastify'
 
 export default class UserPartial extends Component{
     state = {
@@ -9,7 +10,7 @@ export default class UserPartial extends Component{
     remove = () => {
         Meteor.call('users.remove', this.props.user._id, (error, result) => {
             if(error){
-                alert('Erreur', error)
+                toast.error(error.reason)
             }
         })
     }
@@ -19,7 +20,9 @@ export default class UserPartial extends Component{
         return(
             <Segment>
                 <h3>{user.emails[0].address}</h3>
-                <Button onClick={this.remove} color="red" size="mini">Supprimer</Button>
+                {!Roles.userIsInRole(user._id, 'admin') && 
+                    <Button onClick={this.remove} color="red" size="mini">Supprimer</Button>
+                }
             </Segment>
         )
     }
