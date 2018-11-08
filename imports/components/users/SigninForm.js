@@ -3,6 +3,8 @@ import { Form, Button } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+// Composant React de formulaire de connexion
+
 class SigninForm extends Component {
     state = {
         
@@ -19,6 +21,7 @@ class SigninForm extends Component {
         })
     }
 
+    // Fonction de mofication du state en fonction de la valeur et de l'attribut name du input
     handleChange = (e, {name, value}) => this.setState({[name]: value})
 
     render(){
@@ -48,4 +51,5 @@ class SigninForm extends Component {
     }
 }
 
+// Englobage du composant avec withRouter pour avoir accès à this.props.history de react-router
 export default withRouter(SigninForm)

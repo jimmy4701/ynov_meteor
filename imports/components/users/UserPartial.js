@@ -2,6 +2,10 @@ import React, {Component} from 'react'
 import { Segment, Button } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 
+// Composant React de représentation d'un utilisateur
+
+// Affiche le bouton "supprimer" si l'utilisateur en question (passé en props) n'est pas admin
+
 export default class UserPartial extends Component{
     state = {
 

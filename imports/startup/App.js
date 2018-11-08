@@ -5,6 +5,12 @@ import Navbar from '/imports/components/Navbar'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
+/*
+    Base de l'application
+    Appele le bon layout en fonction des routes spécifiées.
+    Si l'url commence par /admin, alors AdminLayout prend le relai
+    sinon MainLayout prend le relai
+*/
 
 export default class App extends Component{
 

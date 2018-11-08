@@ -11,11 +11,15 @@ class Navbar extends Component {
         connect: false
     }
 
-    
+    // Déconnexion de l'utilisateur
     logout = () => {
         Meteor.logout()
     }
 
+    /* Switch d'un attribut du state
+        e : événement de click, passé initialement par le DOM
+        name : destructuring de l'attribut name du bouton sur lequel on a cliqué
+    */
     toggleState = (e, {name}) => this.setState({[name]: !this.state[name]})
 
 
@@ -26,9 +30,11 @@ class Navbar extends Component {
             <MainContainer>
                 {user ?
                     <Fragment>
-                        <Link to="/admin">
-                            <Button size="mini">ADMIN</Button> 
-                        </Link>
+                        {Roles.userIsInRole(user._id, "admin") &&
+                            <Link to="/admin">
+                                <Button size="mini">ADMIN</Button> 
+                            </Link>
+                        }
                         <Button onClick={this.logout}>DECONNEXION</Button> 
                     </Fragment>
                     :
@@ -50,11 +56,14 @@ class Navbar extends Component {
 }
 
 export default NavbarContainer = withTracker((props) => {
+    // Tracker React Meteor, dans lequel on récupère les changements des variables provenant de Meteor
+    // pour les passer en props au composant React
     return {
         user: Meteor.user()
     }
 })(Navbar)
 
+// Mini-composant créé avec Styled Components, pour éviter à avoir à écrire du code css ailleurs
 const MainContainer = styled.div`
     height: 4em;
     display: flex;

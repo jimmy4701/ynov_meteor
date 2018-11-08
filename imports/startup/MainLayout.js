@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { Switch, Route} from 'react-router-dom'
 import {Landing, Signup, NotFound } from '/imports/pages'
 
+/*
+    Layout pour les routes standards
+*/
+
 export default class MainLayout extends Component {
 
     render(){

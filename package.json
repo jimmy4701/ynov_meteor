@@ -13,6 +13,7 @@
     "react-router-dom": "^4.3.1",
     "react-toastify": "^4.4.0",
     "semantic-ui-react": "^0.83.0",
+    "simpl-schema": "^1.5.3",
     "styled-components": "^4.0.2"
   }
 }

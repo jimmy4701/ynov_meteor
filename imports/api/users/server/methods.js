@@ -1,5 +1,7 @@
 import {Meteor} from 'meteor/meteor'
 
+// Méthodes / endpoints pour les utilisateurs
+
 Meteor.methods({
     'users.signup'({email, password}){
         Accounts.createUser({email, password})
