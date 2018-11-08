@@ -1,14 +1,22 @@
 import React, {Component} from 'react'
 import { Form, Button } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
-export default class SigninForm extends Component {
+class SigninForm extends Component {
     state = {
         
     }
 
     signin = () => {
         const {email, password} = this.state
-        Meteor.loginWithPassword(email, password)
+        Meteor.loginWithPassword(email, password, (error, result) => {
+            if(error){
+                toast.error(error.message)
+            }else{
+                this.props.history.push("/")
+            }
+        })
     }
 
     handleChange = (e, {name, value}) => this.setState({[name]: value})
@@ -39,3 +47,5 @@ export default class SigninForm extends Component {
         )
     }
 }
+
+export default withRouter(SigninForm)
