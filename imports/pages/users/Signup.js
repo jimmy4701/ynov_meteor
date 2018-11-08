@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { toast } from 'react-toastify'
 import { Form, Container, Button} from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
 
-export default class Signup extends Component {
+class Signup extends Component {
     state = {
         
     }
@@ -18,6 +19,7 @@ export default class Signup extends Component {
                toast.error(`Erreur lors de l'inscription ${error.message}`)
             }else{
                 Meteor.loginWithPassword(email, password)
+                this.props.history.push("/")
             }
             this.setState({loading: false})
         })
@@ -42,3 +44,4 @@ export default class Signup extends Component {
 
 }
 
+export default withRouter(Signup)
