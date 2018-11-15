@@ -46,7 +46,7 @@ export default class PromoForm extends Component{
                 <TextArea
                     onChange={this.handleChange}
                     name="comment"
-                    value={promo.comment}
+                    value={promo.comment ? promo.comment : ""}
                     placeholder="Commentez la promo"
                 />
             </Form>
