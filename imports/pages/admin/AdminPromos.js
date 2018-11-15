@@ -1,8 +1,14 @@
 import React, {Component} from 'react'
+import { PromoForm } from '/imports/components'
+import { Container } from 'semantic-ui-react'
 
 export default class AdminPromos extends Component {
 
     render(){
-        return <p>ADMIN PROMOS</p>
+        return(
+            <Container>
+                <PromoForm />
+            </Container>
+        )
     }
 }
