@@ -1,0 +1,9 @@
+{
+    "public": {
+        "APP_TITLE": "Hyperplanning Ynov"
+    },
+    "private": {
+        "ADMIN_EMAIL": "changeman@yopmail.com",
+        "ADMIN_PASSWORD": "changeme"
+    } 
+}

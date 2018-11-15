@@ -9,10 +9,19 @@ Meteor.startup(() => {
     if(Meteor.isDevelopment){
         const admin = Meteor.users.findOne({roles: 'admin'})
         if(!admin){
+
             const id = Accounts.createUser({
-                email: Meteor.settings.private.ADMIN_EMAIL, 
-                password: Meteor.settings.private.ADMIN_PASSWORD
+                email: "admin@yopmail.com", 
+                password: "admin"
             })
+
+
+            // BONNE MANIERE DE FAIRE <3
+            // Lancer l'appli avec "meteor --settings SETTING_FILE.JSON"
+            // const id = Accounts.createUser({
+            //     email: Meteor.settings.private.ADMIN_EMAIL, 
+            //     password: Meteor.settings.private.ADMIN_PASSWORD
+            // })
             Roles.addUsersToRoles(id, 'admin')
         }
 
