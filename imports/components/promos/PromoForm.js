@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import { Form, TextArea } from 'semantic-ui-react'
+import React, {Component, Fragment} from 'react'
+import { Form, TextArea, Button } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 
 export default class PromoForm extends Component{
@@ -26,8 +26,25 @@ export default class PromoForm extends Component{
                 toast.error(error.reason)
             }else{
                 toast.success(`Promo ${this.props.promo ? 'modifiée' : 'créée'}`)
+                this.setState({promo: {}})
             }
         } )
+    }
+
+    remove = () => {
+        const {promo} = this.props
+        Meteor.call('promos.remove', promo._id , (error, result) => {
+            if(error){
+                console.log('Erreur', error.message)
+                toast.error(error.message)
+            }else{
+                toast.success("Promo supprimée")
+                this.setState({promo: {}})
+                if(this.props.onRemove){
+                    this.props.onRemove()
+                }
+            }
+        })
     }
 
 
@@ -35,21 +52,24 @@ export default class PromoForm extends Component{
     render(){
         const {promo} = this.state
         return(
-            <Form onSubmit={this.submitPromo}>
-                <Form.Input
-                    label='Nom de la promo'
-                    onChange={this.handleChange}
-                    value={promo.name}
-                    name='name'
-                    required
-                />
-                <TextArea
-                    onChange={this.handleChange}
-                    name="comment"
-                    value={promo.comment ? promo.comment : ""}
-                    placeholder="Commentez la promo"
-                />
-            </Form>
+            <Fragment>
+                <Form onSubmit={this.submitPromo}>
+                    <Form.Input
+                        label='Nom de la promo'
+                        onChange={this.handleChange}
+                        value={promo.name ? promo.name : ""}
+                        name='name'
+                        required
+                    />
+                    <TextArea
+                        onChange={this.handleChange}
+                        name="comment"
+                        value={promo.comment ? promo.comment : ""}
+                        placeholder="Commentez la promo"
+                    />
+                </Form>
+                {this.props.promo && <Button onClick={this.remove}>Supprimer</Button>}
+            </Fragment>
         )
     }
 }

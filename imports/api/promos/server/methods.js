@@ -11,6 +11,10 @@ Meteor.methods({
     'promos.update'(promo){
         Promos.update({_id: promo._id}, {$set: promo})
         console.log('SERVER : Promo créée')
+    },
+    'promos.remove'(promo_id){
+        Promos.remove({_id: promo_id})
+        console.log('SERVER : Promo supprimée')
     }
 })
 

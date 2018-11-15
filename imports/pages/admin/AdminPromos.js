@@ -10,12 +10,14 @@ class AdminPromos extends Component {
 
     editPromo = (active_promo) => this.setState({active_promo})
 
+    clearActivePromo = () => this.setState({active_promo: null})
+
     render(){
         const {loading, promos} = this.props
         const {active_promo} = this.state
         return(
             <Container>
-                <PromoForm promo={active_promo}/>
+                <PromoForm promo={active_promo} onRemove={this.clearActivePromo}/>
                 {loading ? 
                     <Loader>Chargement des promos</Loader> 
                 : 
