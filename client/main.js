@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '/imports/startup/App'
 
+import "react-datepicker/dist/react-datepicker.css"
+
 /*
     Initialisation de l'application coté client
     On affiche le composant App (base de l'application React) dans la div#root du fichier main.html

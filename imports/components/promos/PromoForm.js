@@ -1,6 +1,8 @@
 import React, {Component, Fragment} from 'react'
 import { Form, TextArea, Button } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
 
 export default class PromoForm extends Component{
     state = {
@@ -20,6 +22,9 @@ export default class PromoForm extends Component{
     submitPromo = (e) => {
         e.preventDefault()
         const {promo} = this.state
+        promo.start_date = promo.start_date.toString()
+        promo.end_date = promo.end_date.toString()
+        console.log('submit promo')
         Meteor.call(this.props.promo ? 'promos.update' : 'promos.insert', promo, (error, result) => {
             if(error){
                 console.log(error.message)
@@ -47,7 +52,12 @@ export default class PromoForm extends Component{
         })
     }
 
-
+    handleSelectDate = (date, attr) => {
+        let {promo} = this.state
+        promo[attr] = date
+        this.setState({promo})
+    }
+    
 
     render(){
         const {promo} = this.state
@@ -67,6 +77,23 @@ export default class PromoForm extends Component{
                         value={promo.comment ? promo.comment : ""}
                         placeholder="Commentez la promo"
                     />
+                    <Form.Field>
+                        <label>Date de départ</label>
+                        <DatePicker
+                            selected={promo.start_date}
+                            onChange={(date) => this.handleSelectDate(date, 'start_date')}
+                            name="start_date"
+                        />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Date de fin</label>
+                        <DatePicker
+                            selected={promo.end_date}
+                            onChange={(date) => this.handleSelectDate(date, 'end_date')}
+                            name="end_date"
+                        />
+                    </Form.Field>
+                    <Button>{this.props.promo ? "Modifier" : "Créer"}</Button>
                 </Form>
                 {this.props.promo && <Button onClick={this.remove}>Supprimer</Button>}
             </Fragment>
