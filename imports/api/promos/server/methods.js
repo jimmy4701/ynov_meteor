@@ -6,7 +6,7 @@ import { Promos } from '../promos'
 Meteor.methods({
     'promos.insert'(promo){
         Promos.insert(promo)
-        console.log('Promo créée')
+        console.log('SERVER : Promo créée')
     }
 })
 

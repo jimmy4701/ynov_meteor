@@ -15,7 +15,7 @@ class AdminLayout extends Component {
     render(){
         const {user} = this.props
 
-        if(user){
+        if(user && Roles.userIsInRole(user._id, 'admin')){
             return(
                 <Switch>
                     <Route path="/admin" exact component={Dashboard} />
