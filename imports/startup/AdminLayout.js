@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route, Redirect} from 'react-router-dom'
-import {Dashboard} from '/imports/pages/admin'
+import {Dashboard, AdminPromos} from '/imports/pages/admin'
 import {NotFound} from '/imports/pages'
 import { withTracker } from 'meteor/react-meteor-data'
 
@@ -19,9 +19,12 @@ class AdminLayout extends Component {
             return(
                 <Switch>
                     <Route path="/admin" exact component={Dashboard} />
+                    <Route path="/admin/promos" component={AdminPromos} />
                     <Route path="*" component={NotFound} />
                 </Switch>
             )
+        }else if(Meteor.loggingIn()){
+            return <p>LOADING</p>
         }else{
             return <Redirect to="/signup" />
         }
