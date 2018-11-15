@@ -7,6 +7,10 @@ export default class PromoForm extends Component{
         promo: {}
     }
 
+    componentWillReceiveProps(props){
+        if(props.promo) this.setState({promo: props.promo})
+    }
+
     handleChange = (event, {name, value}) => {
         let {promo} = this.state
         promo[name] = value
@@ -16,12 +20,12 @@ export default class PromoForm extends Component{
     submitPromo = (e) => {
         e.preventDefault()
         const {promo} = this.state
-        Meteor.call('promos.insert', promo, (error, result) => {
+        Meteor.call(this.props.promo ? 'promos.update' : 'promos.insert', promo, (error, result) => {
             if(error){
                 console.log(error.message)
                 toast.error(error.reason)
             }else{
-                toast.success("Promo créée !")
+                toast.success(`Promo ${this.props.promo ? 'modifiée' : 'créée'}`)
             }
         } )
     }

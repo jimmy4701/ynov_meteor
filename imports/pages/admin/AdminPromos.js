@@ -6,16 +6,21 @@ import { withTracker } from 'meteor/react-meteor-data'
 
 class AdminPromos extends Component {
 
+    state = {}
+
+    editPromo = (active_promo) => this.setState({active_promo})
+
     render(){
         const {loading, promos} = this.props
+        const {active_promo} = this.state
         return(
             <Container>
-                <PromoForm />
+                <PromoForm promo={active_promo}/>
                 {loading ? 
                     <Loader>Chargement des promos</Loader> 
                 : 
                     <Fragment>
-                        {promos.map(promo => <p>{promo.name}</p>)}
+                        {promos.map(promo => <p onClick={() => this.editPromo(promo)}>{promo.name}</p>)}
                     </Fragment>
                 }
             </Container>
