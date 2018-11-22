@@ -1,9 +1,11 @@
 {
     "public": {
-        "APP_TITLE": "Hyperplanning Ynov"
+        "APP_TITLE": "Hyperplanning Ynov",
+        "STRIPE_PUBLIC_KEY": "pk_test_abvDmaCjiESpOKtaExa8AOTQ"
     },
     "private": {
         "ADMIN_EMAIL": "changeman@yopmail.com",
-        "ADMIN_PASSWORD": "changeme"
+        "ADMIN_PASSWORD": "changeme",
+        "STRIPE_PRIVATE_KEY": "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
     } 
 }
