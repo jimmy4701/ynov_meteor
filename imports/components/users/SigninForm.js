@@ -17,6 +17,9 @@ class SigninForm extends Component {
                 toast.error(error.message)
             }else{
                 this.props.history.push("/")
+                if(this.props.onSignin){
+                    this.props.onSignin()
+                }
             }
         })
     }

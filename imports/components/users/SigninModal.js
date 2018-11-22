@@ -15,7 +15,7 @@ export default class SigninModal extends Component {
                 <Modal.Content image>
                     <Image wrapped size='medium' src='/images/timeline.svg' />
                     <Modal.Description>
-                        <SigninForm />
+                        <SigninForm onSignin={this.props.onClose}/>
                     </Modal.Description>
                 </Modal.Content>
             </Modal>
