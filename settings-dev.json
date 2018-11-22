@@ -6,6 +6,6 @@
     "private": {
         "ADMIN_EMAIL": "changeman@yopmail.com",
         "ADMIN_PASSWORD": "changeme",
-        "STRIPE_PRIVATE_KEY": "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+        "STRIPE_PRIVATE_KEY": "sk_test_xEd2W3lneqP7n6Jw8d5Sjdo8"
     } 
 }
