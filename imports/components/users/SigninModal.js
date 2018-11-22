@@ -10,7 +10,7 @@ export default class SigninModal extends Component {
 
     render(){
         return(
-            <Modal open={<Button>Connexion</Button>}>
+            <Modal open={this.props.open} onClose={this.props.onClose}>
                 <Modal.Header>Connexion</Modal.Header>
                 <Modal.Content image>
                     <Image wrapped size='medium' src='/images/timeline.svg' />

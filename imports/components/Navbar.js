@@ -29,7 +29,6 @@ class Navbar extends Component {
         return(
             <MainContainer>
                 <MainImage src="/images/timeline.svg" />
-                <SigninModal />
                 <div>
                     {user ?
                         <Fragment>
@@ -43,7 +42,7 @@ class Navbar extends Component {
                         :
                         <Fragment>
                             {connect ?
-                                <SigninForm />
+                                <SigninModal open={true} onClose={(e) => this.toggleState(e, {name: "connect"})}/>
                             :
                                 <Button onClick={this.toggleState} name="connect" size="mini">Connexion</Button>
                             }
