@@ -1,6 +1,7 @@
 import {Meteor} from 'meteor/meteor'
 var stripe = require("stripe")(Meteor.settings.private.STRIPE_PRIVATE_KEY);
 
+
 // Méthodes / endpoints pour les utilisateurs
 
 Meteor.methods({
@@ -8,17 +9,38 @@ Meteor.methods({
         console.log('---------------- STRIPE CALL-----------------')
         console.log("STRIPE TOKEN", token.id)
         
-        console.log('STRIPE CHECK TOKEN', token)
-        const charge = await stripe.charges.create({
-            source: token.id,
-            amount: 200,
-            currency: "eur",
-            description: "PAIEMENT TEST"
+        const customer = await stripe.customers.create({
+            description: email
+            
+        })
+        console.log('Stripe customer', customer.id)
+        
+        const source = await stripe.customers.createSource(
+            customer.id,
+            { source: token.id }
+            )
+            
+        console.log("Stripe source", source.id)
+
+        const subscription = await stripe.subscriptions.create({
+            customer: customer.id,
+            items: [
+                {
+                  plan: "school_year",
+                  quantity: 1
+                }
+              ]
         })
 
-        console.log('charge', charge)
-        if(charge){
-            Accounts.createUser({email, password})
+        console.log("Stripe subscription", subscription.id)
+        
+
+        if(subscription){
+            const user_id = Accounts.createUser({email, password})
+            Meteor.users.update({_id: user_id}, {$set: {
+                roles: ['subscribed'], 
+                stripe: {customer: customer.id, subscription: subscription.id} 
+            }})
         }
 
         

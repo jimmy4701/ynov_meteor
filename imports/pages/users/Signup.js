@@ -31,6 +31,7 @@ class Signup extends Component {
              }else{
                  // Si l'utilisateur a été créé, on le connecte dans la foulée avec Meteor et on le redirige vers la landing
                  this.props.history.push('/')
+                 Meteor.loginWithPassword(email, password)
                  toast.success("YEAH")
              }
         })
