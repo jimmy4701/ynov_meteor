@@ -4,7 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data'
 import styled from 'styled-components'
 import { Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import SigninForm from '/imports/components/users/SigninForm'
+import {SigninForm, SigninModal} from '/imports/components'
 
 class Navbar extends Component {
     state = {
@@ -28,27 +28,31 @@ class Navbar extends Component {
         const {connect} = this.state
         return(
             <MainContainer>
-                {user ?
-                    <Fragment>
-                        {Roles.userIsInRole(user._id, "admin") &&
-                            <Link to="/admin">
-                                <Button size="mini">ADMIN</Button> 
-                            </Link>
-                        }
-                        <Button onClick={this.logout}>DECONNEXION</Button> 
-                    </Fragment>
-                    :
-                    <Fragment>
-                        {connect ?
-                            <SigninForm />
+                <MainImage src="/images/timeline.svg" />
+                <SigninModal />
+                <div>
+                    {user ?
+                        <Fragment>
+                            {Roles.userIsInRole(user._id, "admin") &&
+                                <Link to="/admin">
+                                    <Button size="mini">ADMIN</Button> 
+                                </Link>
+                            }
+                            <Button onClick={this.logout}>DECONNEXION</Button> 
+                        </Fragment>
                         :
-                            <Button onClick={this.toggleState} name="connect" size="mini">Connexion</Button>
-                        }
-                        <Link to="/signup">
-                            <Button size="mini">Inscription</Button> 
-                        </Link>
-                    </Fragment>
-                }
+                        <Fragment>
+                            {connect ?
+                                <SigninForm />
+                            :
+                                <Button onClick={this.toggleState} name="connect" size="mini">Connexion</Button>
+                            }
+                            <Link to="/signup">
+                                <Button size="mini">Inscription</Button> 
+                            </Link>
+                        </Fragment>
+                    }
+                </div>
             </MainContainer>
         )
     }
@@ -67,7 +71,12 @@ export default NavbarContainer = withTracker((props) => {
 const MainContainer = styled.div`
     height: 4em;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #d8d8d8;
+`
+
+const MainImage = styled.img`
+    max-height: 75%;
+    margin: 1em;
 `
