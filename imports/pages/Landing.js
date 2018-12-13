@@ -2,11 +2,23 @@ import React, { Component } from 'react'
 import { withTracker } from 'meteor/react-meteor-data'
 import { Button, Container } from 'semantic-ui-react'
 import UserPartial from '/imports/components/users/UserPartial'
+import { toast } from 'react-toastify'
 
 
 class Landing extends Component {
     state = {
 
+    }
+
+    updateSubscription = () => {
+        Meteor.call('users.update_subscription', (error, result) => {
+            if(error){
+                console.log('Erreur', error.message)
+                toast.error(error.message)
+            }else{
+                toast.success("CHECK YOUR CONSOLE")
+            }
+        })
     }
 
 
@@ -15,6 +27,7 @@ class Landing extends Component {
         return(
             <div>
                 <Container>
+                    <Button size="huge" onClick={this.updateSubscription}>UPDATE SUBSCRIPTION</Button>
                     {users.length == 0 && <p>Aucun utilisateurs</p>}
                     {!current_user && <p>Vous devez vous connecter pour voir la liste des utilisateurs</p>}
                     {users.map(user => <UserPartial user={user}/>)}

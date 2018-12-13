@@ -54,6 +54,19 @@ Meteor.methods({
             throw new Meteor.Error('403', "Vous n'etes pas administrateur")
         }
     },
+    async 'users.update_subscription'(){
+        const user = Meteor.users.findOne({_id: this.userId})
+        const subscription = await stripe.subscriptions.retrieve(user.stripe.subscription)
+        console.log('SUBSCRIPTION', subscription.items)
+        const item_id = subscription.items.data[0].id
+
+        const stripe_item = await stripe.subscriptionItems.update(
+            item_id,
+            {quantity: 2}
+        )
+
+        console.log("STRIPE ITEM", stripe_item)
+    },
     'stripe.check_token'(token){
         
     }
